@@ -23,7 +23,7 @@ class _QuotesListState extends State<QuotesList> {
   ];
 
   Widget quoteTemplate(quote) {
-    return QuoteCard(quote:quote);
+    return QuoteCard(quote:quote, delete: () {  },);
   }
 
   @override
@@ -38,7 +38,14 @@ class _QuotesListState extends State<QuotesList> {
       ),
       body: Column(
         children: quotes
-            .map((quote) => QuoteCard(quote:quote))
+            .map((quote) => QuoteCard(
+            quote:quote,
+            delete:(){
+              setState(() {
+                quotes.remove(quote);
+              });
+            }
+        ))
             .toList(),
       ),
     );
